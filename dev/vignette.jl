@@ -22,9 +22,16 @@ but socialism remains seated"
 rnd_dists = semantic_space_dists(random_txt,ft_embtable)
 colors_dists = semantic_space_dists(colors_txt,ft_embtable)
 
+rnd_dists_ph = semantic_space_dists_phrase(random_txt, ft_embtable)
+colors_dists_ph = semantic_space_dists_phrase(colors_txt,ft_embtable)
+
 # RQA metrics
 colors_props = rqa_metrics(colors_dists["skipmiss_raw"])
 rnd_props = rqa_metrics(rnd_dists["skipmiss_raw"])
+
+colors_props_ph = rqa_metrics(colors_dists_ph["distances_raw"])
+rnd_props_ph = rqa_metrics(rnd_dists_ph["distances_raw"])
+
 
 # Windowed RQA metrics
 windowed_rqa_metrics(colors_dists["skipmiss_raw"],10,1)
