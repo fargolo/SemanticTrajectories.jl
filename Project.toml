@@ -21,6 +21,7 @@ Embeddings = "0.4"
 TSne = "1"
 WordTokenizers = "0.5"
 julia = "1.6"
+NaNStatistics "0.6.30"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
