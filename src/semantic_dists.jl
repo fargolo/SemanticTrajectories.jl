@@ -77,6 +77,7 @@ function semantic_space_dists(raw_text,embtable)
     word_dists_skipmiss_df = DataFrame(hcat(labels_skipmiss,word_dists_skipmiss),:auto)
     rename!(word_dists_skipmiss_df, ["HEADER",labels_skipmiss...], makeunique=true)
     rename!(word_dists_df, ["HEADER",labels...], makeunique=true)
+    
 
     return Dict("skipmiss_distances" => word_dists_skipmiss_df,
     "skipmiss_raw" => Matrix{Float64}(word_dists_skipmiss_df[:,2:end]), 
@@ -106,7 +107,7 @@ function semantic_space_dists_phrase(raw_text,embtable)
         latent_space_reps_skipmiss = collect(skipmissing(latent_space_reps)) 
         labels_skipmiss = labels[.!(ismissing.(vec(latent_space_reps)))]
         
-        sentences_sum = foldl(+,latent_space_reps_skipmiss)
+        sentences_sum = foldl(+,latent_space_reps_skipmiss;init=zeros(300))
         push!(sentences_emb,sentences_sum)
 
     end        
@@ -117,8 +118,14 @@ function semantic_space_dists_phrase(raw_text,embtable)
     word_dists_df = DataFrame(hcat(tokenized_sentences,word_dists),:auto)
     rename!(word_dists_df, ["HEADER",tokenized_sentences...], makeunique=true)
 
+    dists_raw = Matrix{Float64}(word_dists_df[:,2:end])
+    dists_raw_skip_nan = dists_raw[
+                    [NaNStatistics.countnans(row) < length(row) - 1 for row in eachrow(dists_raw)], 
+                    [NaNStatistics.countnans(col) < length(col) - 1 for col in eachcol(dists_raw)]
+                    ]
+
     return Dict("distances" => word_dists_df,
-    "distances_raw" => Matrix{Float64}(word_dists_df[:,2:end]))
+    "distances_raw" => dists_raw_skip_nan)
 
 end
 

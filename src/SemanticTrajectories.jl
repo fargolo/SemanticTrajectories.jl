@@ -1,7 +1,7 @@
 module SemanticTrajectories
 
 using WordTokenizers 
-using Statistics , Distances , DataFrames
+using Statistics , Distances , DataFrames , NaNStatistics
 using DynamicalSystems , TSne
 
 export 
