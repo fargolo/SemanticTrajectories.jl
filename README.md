@@ -3,6 +3,8 @@
 [![Build Status](https://github.com/fargolo/SemanticTrajectories.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/fargolo/SemanticTrajectories.jl/actions/workflows/CI.yml?query=branch%3Amain)  
 
 
+See: https://osf.io/preprints/psyarxiv/epgfy/
+
 `SemanticTrajectories.jl` is package built upon `DynamicalSystems.jl` and `Embeddings.jl`. It is designed to analyze semantic coherence in text. A popular approach in literature is to calculate coherence among consecutive words ("first order coherence") or among two words having a third word in-between ("second order coherence"). Then, one evaluates properties such as average, minimum and maximum coherence.  
 
 Semantic `SemanticTrajectories.jl` leverages `DynamicalSystems.jl` Recurrence Quantification Analysis (RQA) capabilities to analyze semantic coherence in the entire trajectory.  
